@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="content-type" content="text/html">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <title>Welcome To Chatting Room</title>
+        <!-- 引入自定义样式 -->
+        <link rel="stylesheet" href="./css/index.css">
+        <!-- 引入表情插件 jQuery-emoji -->
+        <link rel="stylesheet" href="jQuery-emoji/lib/css/jquery.mCustomScrollbar.min.css">
+        <link rel="stylesheet" href="jQuery-emoji/src/css/jquery.emoji.css">
+    </head>
+    <body>
+        <!-- 登录卡片 -->
+        <div class="container_login">
+            <div class="left">
+                <h1>login</h1>
+                <p>欢迎光临, 请输入您的账号和密码进行登录!</p>
+                <h3 class="loginSet"><a href="./sign_up.html">点击注册</a></h3>
+                <h3 class="loginSet" id="forgetPwd"><a href="javascript:;">忘记密码</a></h3>
+            </div>
+            <div class="right">
+                <!-- Svg 动画 -->
+                <svg viewBox="0 0 320 300">
+                    <defs>
+                        <!-- 定义线性渐变 -->
+                        <linearGradient inkscape:collect="always" id="linearGradient1" x1="13" y1="193.49992" x2="307"
+                            y2="193.49992" gradientUnits="userSpaceOnUse">
+                            <stop style="stop-color:#0ff;" offset="0" />
+                            <stop style="stop-color:#f0f;" offset="1" />
+                        </linearGradient>
+                    </defs>
+                    <path
+                        d="m 40,120.00016 239.99984,-3.2e-4 c 0,0 24.99263,0.79932 25.00016,35.00016 0.008,34.20084 -25.00016,35 -25.00016,35 h -239.99984 c 0,-0.0205 -25,4.01348 -25,38.5 0,34.48652 25,38.5 25,38.5 h 215 c 0,0 20,-0.99604 20,-25 0,-24.00396 -20,-25 -20,-25 h -190 c 0,0 -20,1.71033 -20,25 0,24.00396 20,25 20,25 h 168.57143" />
+                </svg>
+                <div class="form">
+                    <label for="username">账号</label>
+                    <input type="text" id="username" autocomplete="off">
+                    <label for="password">密码</label>
+                    <input type="password" id="password">
+                    <button id="submit">登录</button>
+                </div>
+            </div>
+        </div>
+        <!-- 选择头像盒子 -->
+        <div class="head_profile_select" style="display: none">
+            <h3>请选择一个头像！</h3>
+            <ul>
+                <li class="selecting"><img src="imgs/head_profile1.jpg" alt=""></li>
+                <li><img src="imgs/head_profile2.jpg" alt=""></li>
+                <li><img src="imgs/head_profile3.jpg" alt=""></li>
+                <li><img src="imgs/head_profile4.jpg" alt=""></li>
+                <li><img src="imgs/head_profile5.jpg" alt=""></li>
+                <li><img src="imgs/head_profile6.jpg" alt=""></li>
+                <li><img src="imgs/head_profile7.jpg" alt=""></li>
+                <li><img src="imgs/head_profile8.jpg" alt=""></li>
+                <li><img src="imgs/head_profile9.jpg" alt=""></li>
+                <li><img src="imgs/head_profile10.jpg" alt=""></li>
+                <li><img src="imgs/head_profile11.jpg" alt=""></li>
+                <li><img src="imgs/head_profile12.jpg" alt=""></li>
+            </ul>
+            <button type="button" id="hdImgBtn">选好啦</button>
+        </div>
+        <!-- 聊天窗口 -->
+        <div class="container" style="display: none">
+            <!-- 左侧用户列表 -->
+            <div class="user-list">
+                <div class="header">
+                    <div class="avatar">
+                        <img src="imgs/head_profile1.jpg" alt="" class="img avatar_url">
+                    </div>
+                    <div class="info">
+                        <h3 class="username"></h3>
+                    </div>
+                </div>
+                <div class="title">
+                    <h3>用户列表</h3>
+                </div>
+                <ul>
+                    <li class="user">
+                        <div class="avatar"><img src="imgs/群聊.jpg" alt=""></div>
+                        <div class="name">群聊<span id="userCount"></span></div>
+                    </li>            
+                    <!-- 用于动态添加增加的好友列表 -->
+                </ul>
+            </div>
+            <!-- 聊天主窗口 -->
+            <div class="box">
+                <div class="box-hd">
+                    <h3 id="chatName">群聊<span id="userCount"></span></h3>
+                </div>
+                <div class="box-bd">
+                    <!-- 消息显示区域 -->
+                </div>
+                <!-- 聊天窗口底部 -->
+                <div class="box-ft">
+                    <!-- 工具栏 -->
+                    <div class="toolbar">
+                        <a class="face" href="javascript:;" title="表情"></a>
+                        <a href="javascript:;" title="图片" class="file">
+                            <label for="file"></label><input type="file" id="file" style="display:none;">
+                        </a>
+                    </div>
+                    <!-- 内容输入区 -->
+                    <div class="content">
+                        <!-- div添加contenteditable即可编辑 -->
+                        <div name="" id="content" class="text" contenteditable></div>
+                    </div>
+                    <!-- 发送按钮 -->
+                    <div class="action">
+                        <span class="desc">按下Ctrl+Enter发送</span>
+                        <a class="btn-send" id="btn-send" href="javascript:;">发送</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 鼠标动画 -->
+        <!-- <img src="../images/加载动效.gif" alt="" id="mousem"> -->
+
+
+        <!-- 导入 socket.io 客户端 -->
+        <script src="/socket.io/socket.io.js"></script>
+        <!-- 导入 jQuery 库 -->
+        <script src="./javascript/jquery.min.js"></script>
+        <!-- 导入anite 动画库 -->
+        <script src="./javascript/anite.min.js"></script>
+        <!-- 用于传输登陆页面的用户输入的数据 -->
+        <script src="./javascript/index.js"></script>
+        <!-- 用于渲染登录页面输入框的动画效果 -->
+        <script src="./javascript/loginAnimte.js"></script>
+        <!-- 导入表情插件 jQuery-emoji -->
+        <script src="jQuery-emoji/lib/script/jquery.mousewheel-3.0.6.min.js"></script>
+        <script src="jQuery-emoji/lib/script/jquery.mCustomScrollbar.min.js"></script>
+        <script src="jQuery-emoji/src/js/jquery.emoji.js"></script>
+    </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/sign_up.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 注册卡片 -->
+    <div class="box">
+        <h1>用户注册</h1>
+        <form action="">
+            <table>
+                <tr>
+                    <td> <label for="user">用户名</label></td>
+                    <td> <input type="text" name="" id="user" placeholder="请输入昵称(不超过20位字符)"></td>
+                </tr>
+                <tr>
+                    <td><label for="pwd1">密码</label></td>
+                    <td><input type="password" name="" id="pwd1" placeholder="请输入密码"></td>
+                </tr>
+
+                <tr>
+                    <td><label for="pwd2">确认密码</label></td>
+                    <td><input type="password" name="" id="pwd2" placeholder="请确认密码"></td>
+                </tr>
+
+                <tr>
+                    <td><label for="age">年龄</label></td>
+                    <td><input type="month" name="" id="age" placeholder="请选择您的生日"></td>
+                </tr>
+
+                <tr>
+                    <td><label for="gender">性别</label></td>
+                    <td><select name="" id="gender" placeholder="请选择">
+                        <option value="男">男</option>
+                        <option value="女">女</option>        
+                    </select></td>
+                </tr>
+                <tr>
+                    <td><label for="tel">电话号码</label></td>
+                    <td><input type="tel" name="" id="tel" placeholder="请输入您的联系电话，忘记密码时由此找回"></td>
+                </tr>
+
+                <tr>
+                    <td><label for="email">电子邮件</label></td>
+                    <td><input type="email" name="email" id="email" placeholder="请输入您的电子邮件地址"></td>
+                </tr>
+            </table>
+            <input type="radio" name="" id="box1"><span>选中则代表您同意</span><a href="javascript:;">《Chat Room 聊天室规则》</a>
+            <button type="button" id="button">确认信息，并注册</button>
+        </form>
+
+    </div>
+
+    <!-- 导入 socket.io 客户端 -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- 导入 jQuery 库 -->
+    <script src="./javascript/jquery.min.js"></script>
+    <!-- 用于传输登陆页面的用户输入的数据 -->
+    <script src="./javascript/sign_up.js"></script>
+
+
+</body>
+
+</html>
